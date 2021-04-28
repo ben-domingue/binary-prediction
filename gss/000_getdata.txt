@@ -1,0 +1,19 @@
+extract creation here: https://gssdataexplorer.norc.org/pages/show?page=gss%2Fhelp_extracts
+
+these variables:
+1|mempolit|9|No answer
+2|partyid|9|No answer
+3|income|99|No answer
+4|mobile16|9|No answer
+5|race|3|Other
+6|sex|2|Female
+7|educ|99|No answer
+8|age|99|No answer
+9|childs|9|Dk na
+10|divorce|9|No answer
+11|agewed|99|No answer
+12|marital|9|No answer
+13|commute|99|No answer
+15|hrs2|99|No answer
+16|wrkstat|9|No answer
+18|ballot|4|Ballot d

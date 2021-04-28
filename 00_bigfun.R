@@ -1,5 +1,5 @@
 
-bigfun<-function(df,fm1,fm2,nfold=10) {
+bigfun<-function(df,fm1,fm2,nfold=10) { #CV prediction function within dataframe df for two logistic regerssion models (based on formulas fm1 & fm2)
     ##
     outcome<-all.vars(formula(fm1))[1]
     vars<-unique(c(all.vars(formula(fm1)),all.vars(formula(fm2))))
@@ -55,7 +55,7 @@ bigfun<-function(df,fm1,fm2,nfold=10) {
 }
 
 
-getp<-function(a) {
+getp<-function(a) { #see eqn 7. this identies the isomorphic coin
     f<-function(p,a) abs(p*log(p)+(1-p)*log(1-p)-log(a))
     nlminb(.5,f,lower=0.001,upper=.999,a=a)$par
 }

@@ -1,5 +1,5 @@
 library(foreign)
-read.dta("/home/bd/Dropbox/projects/hrs/spousal_death_cesd/data/randhrs1992_2016v1.dta")->x
+read.dta("/home/bd/Dropbox/projects/hrs/spousal_death_cesd/data/randhrs1992_2016v1.dta")->x ##rand file, available here: https://www.rand.org/well-being/social-and-behavioral-policy/centers/aging/dataprod.html
 
 ##hhidpn,sex, race, education
 df<-x[,c("hhidpn","ragender","raracem","raedyrs","raddate","rabyear")]
