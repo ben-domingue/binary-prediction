@@ -135,3 +135,4 @@ for (i in 1:10) {
     pr<-predict(x)
     ew[[i]]<-imv(pr)
 }
+colMeans(do.call("rbind",ew))
