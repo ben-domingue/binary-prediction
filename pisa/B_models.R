@@ -43,6 +43,23 @@ predict<-function(x) {
     rm("x")
     x<-oos
     ###################
+    ##Rasch
+    m<-mirt(resp[,-index],1,"Rasch")
+    co<-coef(m)
+    co<-do.call("rbind",co[-length(co)])
+    item<-data.frame(item=names(resp)[-index],easy=co[,2],load=co[,1])
+    ##
+    th<-fscores(m)
+    stud<-data.frame(id=resp$id,th=th[,1])
+    ##
+    x<-merge(x,stud)
+    x<-merge(x,item)
+    ##
+    kk<-x$load*x$th+x$easy
+    kk<-exp(kk)
+    x$pv1<-kk/(1+kk)
+    x$easy<-x$th<-x$load<-NULL
+    ###################
     ##2pl
     s<-paste("F=1-",ni,"
             PRIOR = (1-",ni,", a1, lnorm, 0.2, 0.2)",sep="") #-1.5
@@ -114,6 +131,7 @@ imv<-function(pr) {
         z<-sum(z)/nrow(x)
         exp(z)
     }    
+    loglik1<-ll(pr,'pv1')
     loglik2<-ll(pr,'pv2')
     loglik3<-ll(pr,'pv3')
     loglik2f<-ll(pr,'pv2f')
@@ -121,13 +139,15 @@ imv<-function(pr) {
         f<-function(p,a) abs(p*log(p)+(1-p)*log(1-p)-log(a))
         nlminb(.5,f,lower=0.001,upper=.999,a=a)$par
     }
+    c1<-getcoins(loglik1)
     c2<-getcoins(loglik2)
     c3<-getcoins(loglik3)
     c2f<-getcoins(loglik2f)
     ew<-function(p1,p0) (p1-p0)/p0
+    imv0<-ew(c2,c1)
     imv1<-ew(c3,c2)
     imv2<-ew(c2f,c2)
-    c(imv1,imv2)
+    c(imv0,imv1,imv2)
 }
 
 ew<-list()
