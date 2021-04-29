@@ -68,7 +68,7 @@ out2<-wrapper(df,fm1,fm2,conds=conds)
 out2c<-do.call("rbind",out2)
 
 
-pdf("/home/bd/Dropbox/Apps/Overleaf/BinaryPrediction/hrs_age.pdf",width=9,height=6.5)
+pdf("/home/bd/Dropbox/Apps/Overleaf/BinaryPrediction/hrs_age.pdf",width=7,height=5)
 par(mfrow=c(2,2),mgp=c(2,1,0),mar=c(3,3,1.5,1),oma=rep(.5,4))
 pf<-function(out,yt,ceiling=0.06) {
     plot(NULL,xlim=c(55,95),ylim=c(-.02,ceiling),xlab="Age",ylab=yt,xaxt='n',bty='n',yaxt='n')
