@@ -1,6 +1,6 @@
 load("pisa.Rdata")
 
-
+##re beta prior on guessing param https://groups.google.com/g/mirt-package/c/8Usx53BoXyw
 predict<-function(x) {
     test<-FALSE
     while (!test) {
@@ -83,7 +83,8 @@ predict<-function(x) {
     ## ###################
     ## ##3pl
     s<-paste("F=1-",ni,"
-            PRIOR = (1-",ni,", a1, lnorm, 0.2, 0.2),(1-",ni,", g, norm, -1.5, 1)",sep="") #-1.5
+    PRIOR = (1-",ni,", a1, lnorm, 0.2, 0.2),(1-",ni,", g, norm, -1.5, 1)",sep="") #-1.5
+    #PRIOR = (1-",ni,", a1, lnorm, 0.2, 0.2),(1-",ni,", g,    expbeta, 5, 17)",sep="") #-1.5
     model<-mirt.model(s)
     m<-mirt(resp[,-index],model,itemtype=rep("3PL",ni),method="EM",technical=list(NCYCLES=10000))->mirt.mod
     co<-coef(m)

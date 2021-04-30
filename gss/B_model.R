@@ -22,7 +22,7 @@ out->out1
 
 #########################################################
 fm1<-formula("gop~1")
-fm2<-formula("gop~white*sex*age")
+fm2<-formula("gop~white*sex*age") ##difference with the above
 out<-list()
 for (yr in 1972:2018) {
     x<-df[df$year==yr,]
