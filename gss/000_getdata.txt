@@ -1,5 +1,4 @@
-extract creation here: https://gssdataexplorer.norc.org/pages/show?page=gss%2Fhelp_extracts
-
+extract available at: https://gssdataexplorer.norc.org/projects/84591
 these variables:
 1|mempolit|9|No answer
 2|partyid|9|No answer
