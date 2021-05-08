@@ -1,5 +1,5 @@
 source("/home/bd/Dropbox/projects/binaryprediction/src/00_bigfun.R")
-load(file="/home/bd/Dropbox/projects/binaryprediction/gss/df_gss.Rdata")
+load(file="/home/bd/Dropbox/projects/binaryprediction/data/gss/df_gss.Rdata")
 results<-list()
 
 df$year<-as.numeric(df$year)
@@ -19,6 +19,13 @@ for (yr in 1972:2018) {
     }
 }
 out->out1
+
+##for table
+tab<-do.call("rbind",out1)
+1000*tab[which.min(tab[,3]),]
+1000*tab[which.max(tab[,3]),]
+
+
 
 #########################################################
 fm1<-formula("gop~1")

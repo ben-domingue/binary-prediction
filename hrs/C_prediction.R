@@ -108,3 +108,23 @@ for (ii in 1:length(games)) {
     text(90,game,names(games)[ii],cex=.7,col='black',pos=3)
 }
 dev.off()
+
+##for table
+f<-function(x) {
+    ii<-which.max(as.numeric(x[,4]))
+    x[ii,]
+}
+f(out1a)
+f(out1b)
+f(out1c)
+f(out2c)
+
+zz<-rbind(out1a,out1b,out1c,out2c)
+ii<-grep("dead 90",rownames(zz))
+zz[ii,]
+
+zz<-rbind(out1a,out1b,out1c,out2c)
+ii<-grep("hibp 63",rownames(zz))
+zz[ii,]
+
+         

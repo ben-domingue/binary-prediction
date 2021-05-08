@@ -1,7 +1,7 @@
 vars<-read.csv("GSS_vars.csv",sep="|",header=TRUE)
 df<-read.csv("GSS.csv",sep="|",header=TRUE)
 
-df$Respondent.id.number->
+id<-df$Respondent.id.number
 NULL->df$Respondent.id.number
 df$Gss.year.for.this.respondent->year
 NULL->df$Gss.year.for.this.respondent
