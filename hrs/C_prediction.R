@@ -95,12 +95,12 @@ pf<-function(out,yt,ceiling=0.06) {
         abline(h=game,col='darkgray',lwd=1)
     }
 }
-pf(out1a,yt="A: E(W), Demographics")
-pf(out1b,yt="B: E(W), Education")
-pf(out1c,yt="C: E(W), Cognition")
-#pf(out2a,yt="E(W), Demographics")
-#pf(out2b,yt="E(W), Education")
-pf(out2c,yt="D: E(W), Grip+Gait")
+pf(out1a,yt="A: IMV, Demographics")
+pf(out1b,yt="B: IMV, Education")
+pf(out1c,yt="C: IMV, Cognition")
+#pf(out2a,yt="IMV, Demographics")
+#pf(out2b,yt="IMV, Education")
+pf(out2c,yt="D: IMV, Grip+Gait")
 games<-list(`Sports Book`=0.091,Baccarat=0.048,Blackjack=0.0099)
 for (ii in 1:length(games)) {
     game<-games[[ii]]
