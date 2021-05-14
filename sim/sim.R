@@ -97,27 +97,68 @@ index<-grepl(".del",colnames(tab),fixed=TRUE)
 library(xtable)
 xtable(tab[,!index])
 
+c1<-cor(mat.noz[,c("b0","b1","b2","ew","r2","auc","f1")],use='p')
+mat.wz$r2.del<-(mat.wz$r2-mat.noz$r2)/mat.noz$r2
+mat.wz$auc.del<-(mat.wz$auc-mat.noz$auc)/mat.noz$auc
+mat.wz$f1.del<-(mat.wz$f1-mat.noz$f1)/mat.noz$f1
+c2<-cor(mat.wz[,c("b0","b1","b2","ew","r2.del","auc.del","f1.del")],use='p')
+
+tab<-rbind(c1[1:3,4:7],c2[1:3,4:7])
+xtable(tab)
+
     
-ran<-range(c(mat.noz$ew,mat.wz$ew))
-par(mfrow=c(2,3),mgp=c(2,1,0),mar=c(3,3,1,1),oma=rep(.5,4))
-plot(mat.noz$b0,mat.noz$ew,pch=19,xlab=expression(beta[0]),ylab="E(W)",ylim=ran,cex=cex,col=col)
-plot(mat.noz$b1,mat.noz$ew,pch=19,xlab=expression(beta[1]),ylab="E(W)",ylim=ran,cex=cex,col=col)
-plot(mat.noz$b2,mat.noz$ew,pch=19,xlab=expression(beta[2]),ylab="E(W)",ylim=ran,cex=cex,col=col)
-plot(mat.wz$b0,mat.wz$ew,pch=19,xlab=expression(beta[0]),ylab="E(W)",ylim=ran,cex=cex,col=col)
-plot(mat.wz$b1,mat.wz$ew,pch=19,xlab=expression(beta[1]),ylab="E(W)",ylim=ran,cex=cex,col=col)
-plot(mat.wz$b2,mat.wz$ew,pch=19,xlab=expression(beta[2]),ylab="E(W)",ylim=ran,cex=cex,col=col)
+## ran<-range(c(mat.noz$ew,mat.wz$ew))
+## par(mfrow=c(2,3),mgp=c(2,1,0),mar=c(3,3,1,1),oma=rep(.5,4))
+## plot(mat.noz$b0,mat.noz$ew,pch=19,xlab=expression(beta[0]),ylab="E(W)",ylim=ran,cex=cex,col=col)
+## plot(mat.noz$b1,mat.noz$ew,pch=19,xlab=expression(beta[1]),ylab="E(W)",ylim=ran,cex=cex,col=col)
+## plot(mat.noz$b2,mat.noz$ew,pch=19,xlab=expression(beta[2]),ylab="E(W)",ylim=ran,cex=cex,col=col)
+## plot(mat.wz$b0,mat.wz$ew,pch=19,xlab=expression(beta[0]),ylab="E(W)",ylim=ran,cex=cex,col=col)
+## plot(mat.wz$b1,mat.wz$ew,pch=19,xlab=expression(beta[1]),ylab="E(W)",ylim=ran,cex=cex,col=col)
+## plot(mat.wz$b2,mat.wz$ew,pch=19,xlab=expression(beta[2]),ylab="E(W)",ylim=ran,cex=cex,col=col)
 
-par(mfrow=c(2,3),mgp=c(2,1,0),mar=c(3,3,1,1),oma=rep(.5,4))
-plot(mat.noz$ew,mat.noz$r2,pch=19,xlab="E(W)",ylab="r2",ylim=c(0,1),cex=cex,col=col)
-plot(mat.noz$ew,mat.noz$auc,pch=19,xlab="E(W)",ylab="AUC",ylim=c(.5,1),cex=cex,col=col)
-plot(mat.noz$ew,mat.noz$f1,pch=19,xlab="E(W)",ylab="F1",ylim=c(0,1),cex=cex,col=col)
-plot(mat.wz$ew,mat.wz$r2,pch=19,xlab="E(W)",ylab="r2",ylim=c(0,1),cex=cex,col=col)
-plot(mat.wz$ew,mat.wz$auc,pch=19,xlab="E(W)",ylab="AUC",ylim=c(.5,1),cex=cex,col=col)
-plot(mat.wz$ew,mat.wz$f1,pch=19,xlab="E(W)",ylab="F1",ylim=c(0,1),cex=cex,col=col)
+## par(mfrow=c(2,3),mgp=c(2,1,0),mar=c(3,3,1,1),oma=rep(.5,4))
+## plot(mat.noz$ew,mat.noz$r2,pch=19,xlab="E(W)",ylab="r2",ylim=c(0,1),cex=cex,col=col)
+## plot(mat.noz$ew,mat.noz$auc,pch=19,xlab="E(W)",ylab="AUC",ylim=c(.5,1),cex=cex,col=col)
+## plot(mat.noz$ew,mat.noz$f1,pch=19,xlab="E(W)",ylab="F1",ylim=c(0,1),cex=cex,col=col)
+## plot(mat.wz$ew,mat.wz$r2,pch=19,xlab="E(W)",ylab="r2",ylim=c(0,1),cex=cex,col=col)
+## plot(mat.wz$ew,mat.wz$auc,pch=19,xlab="E(W)",ylab="AUC",ylim=c(.5,1),cex=cex,col=col)
+## plot(mat.wz$ew,mat.wz$f1,pch=19,xlab="E(W)",ylab="F1",ylim=c(0,1),cex=cex,col=col)
 
-par(mfrow=c(3,3),mgp=c(2,1,0),mar=c(3,3,1,1),oma=rep(.5,4))
-for (nm in c("r2","auc","f1")) {
-    plot(mat.noz$b0,mat.noz[[nm]],pch=19,xlab=expression(beta[0]),ylab=nm)
-    plot(mat.noz$b1,mat.noz[[nm]],pch=19,xlab=expression(beta[1]),ylab=nm)
-    plot(mat.noz$b2,mat.noz[[nm]],pch=19,xlab=expression(beta[2]),ylab=nm)
-}
+## par(mfrow=c(3,3),mgp=c(2,1,0),mar=c(3,3,1,1),oma=rep(.5,4))
+## for (nm in c("r2","auc","f1")) {
+##     plot(mat.noz$b0,mat.noz[[nm]],pch=19,xlab=expression(beta[0]),ylab=nm)
+##     plot(mat.noz$b1,mat.noz[[nm]],pch=19,xlab=expression(beta[1]),ylab=nm)
+##     plot(mat.noz$b2,mat.noz[[nm]],pch=19,xlab=expression(beta[2]),ylab=nm)
+## }
+
+## par(mfrow=c(3,3),mgp=c(2,1,0),mar=c(3,3,1,1),oma=rep(.5,4))
+## cc<-col2rgb("blue")
+## c1<-rgb(cc[1],cc[2],cc[3],alpha=20,maxColorValue=255)
+## cc<-col2rgb("red")
+## c2<-rgb(cc[1],cc[2],cc[3],alpha=20,maxColorValue=255)
+## lp<-function(x,y) {
+##     m<-loess(y~x)
+##     tmp<-cbind(m$x,fitted(m))
+##     tmp[order(tmp[,1]),]
+## }
+## for (nm in c("r2","auc","f1")) {
+##     plot(mat.noz$b0,mat.noz$ew,pch=19,cex=.6,col=c1,ylim=c(0,1),xlab=expression(beta[0]),ylab=paste("Metric (alt=",nm,")",sep=""))
+##     if (nm=='r2') legend("topright",bty='n',fill=c("blue","red"),c("IMV","Alt"),title="Metric")
+##     lines(lp(mat.noz$b0,mat.noz$ew),col='blue',lwd=2)
+##     points(mat.noz$b0,mat.noz[[nm]],pch=19,cex=.6,col=c2)
+##     lines(lp(mat.noz$b0,mat.noz[[nm]]),col='red',lwd=2)
+## }
+## for (nm in c("r2","auc","f1")) {
+##     plot(mat.noz$b1,mat.noz$ew,pch=19,cex=.6,col=c1,ylim=c(0,1),xlab=expression(beta[1]),ylab=paste("Metric (alt=",nm,")",sep=""))
+##     lines(lp(mat.noz$b1,mat.noz$ew),col='blue',lwd=2)
+##     points(mat.noz$b1,mat.noz[[nm]],pch=19,cex=.6,col=c2)
+##     lines(lp(mat.noz$b1,mat.noz[[nm]]),col='red',lwd=2)
+## }
+## ## for (nm in c("r2","auc","f1")) {
+## ##     plot(mat.wz$b2,mat.noz$ew,pch=19,cex=.6,col=c1,ylim=c(0,1),xlab=expression(beta[2]),ylab=paste("Metric (alt=",nm,")",sep=""))
+## ##     lines(lp(mat.wz$b2,mat.noz$ew),col='blue',lwd=2)
+## ##     points(mat.wz$b2,mat.noz[[nm]],pch=19,cex=.6,col=c2)
+## ##     lines(lp(mat.wz$b2,mat.noz[[nm]]),col='red',lwd=2)
+## ## }
+
+
