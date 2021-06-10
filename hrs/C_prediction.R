@@ -11,15 +11,15 @@ conds<-c("hibp","diab","cancr","lung","heart","strok","psych","arthr","proxy","d
 ## names(tmp)[-(1:2)]<-paste(conds,".next",sep='')
 ## df<-merge(df,tmp,all.x=TRUE)
 
-fm1<-formula("outcome~1")
-fm2<-formula("outcome~age")
-conds<-c("hibp","diab","cancr","lung","heart","strok","psych","arthr","proxy","dead")
-out<-list()
-for (cond in conds) {
-    df[[cond]]->df$outcome
-    out[[cond]]<-bigfun(df[!is.na(df$age),],fm1,fm2)
-}
-ew<-do.call("rbind",out)
+## fm1<-formula("outcome~1")
+## fm2<-formula("outcome~age")
+## conds<-c("hibp","diab","cancr","lung","heart","strok","psych","arthr","proxy","dead")
+## out<-list()
+## for (cond in conds) {
+##     df[[cond]]->df$outcome
+##     out[[cond]]<-bigfun(df[!is.na(df$age),],fm1,fm2)
+## }
+## ew<-do.call("rbind",out)
 
 wrapper<-function(df,fm1,fm2,conds) {
     out<-list()
