@@ -13,6 +13,7 @@ for (yr in 1972:2018) {
     x<-df[df$year==yr,]
     tmp<-x[,all.vars(fm2)]
     x<-x[rowSums(is.na(tmp))==0,]
+    print(c(yr,nrow(x)))
     if (nrow(x)>100) {
         ew<-bigfun(x,fm1=fm1,fm2=fm2)
         out[[as.character(yr)]]<-c(yr,ew[c(1,4)],nrow(x))
