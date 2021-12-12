@@ -54,7 +54,7 @@ for (g in 1:10) {
     z<-xx[xx$gr!=g,]
     m<-glm(fm,z,family="binomial")
     xx0<-xx[xx$gr==g,]
-    y<-data.frame(p2=predict(m,x0,type="response"),resp=xx0$y)
+    y<-data.frame(p2=predict(m,xx0,type="response"),resp=xx0$y)
     m<-glm(fm0,z,family="binomial")
     y$p1<-predict(m,xx0,type="response")
     om[g]<-imv(y$resp,y$p1,y$p2)
