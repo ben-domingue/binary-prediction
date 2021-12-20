@@ -56,3 +56,10 @@ mean(om)
 
 
 
+## y<-xx$y
+## x<-xx[,paste("V",1:57,sep="")]
+## cv1  <- cv.glmnet(x, y, foldid = foldid, alpha = 1)
+## m<-glmnet(x,y,family="binomial",folid=xx$gr)
+## xx0<-xx[xx$gr==g,]
+## newx<-as.matrix(xx0[paste("V",1:57,sep="")])
+## pr<-predict(m,newx,type="response")

@@ -54,7 +54,7 @@ data<-list()
 ############################################
 ##Titanic
 ##https://www.kaggle.com/c/titanic
-x<-read.csv("train.csv")
+x<-read.csv("titanic_train.csv")
 x$died<-1-x$Survived
 x$female<-ifelse(x$Sex=="female",1,0)
 x$outcome<-x$died

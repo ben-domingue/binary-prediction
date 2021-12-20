@@ -1,4 +1,4 @@
-df<-read.csv("merged_final.csv")
+df<-read.csv("essays__merged_final.csv")
 
 mm<-median(df$FAMILY_INCOME,na.rm=TRUE)
 y<-ifelse(df$FAMILY_INCOME>mm,1,0)

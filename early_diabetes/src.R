@@ -1,4 +1,4 @@
-df<-read.csv("diabetes_data.csv",header=TRUE,sep=";")
+df<-read.csv("early_diabetes_data.csv",header=TRUE,sep=";")
 
 df$y<-df$class
 df$gender<-ifelse(df$gender=="Male",1,0)
@@ -53,5 +53,3 @@ for (g in 1:10) {
     om[g]<-imv(y$resp,y$p1,y$p2)
 }
 mean(om)
-
-[1] 0.58

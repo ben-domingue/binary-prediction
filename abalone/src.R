@@ -49,7 +49,7 @@ imv<-function(y,p1,p2) {
     imv
 }
 
-om<-numeric()
+om0<-om1<-om<-numeric()
 for (g in 1:10) {
     z<-xx[xx$gr!=g,]
     m<-glm(fm,z,family="binomial")
@@ -58,9 +58,15 @@ for (g in 1:10) {
     m<-glm(fm0,z,family="binomial")
     y$p1<-predict(m,xx0,type="response")
     om[g]<-imv(y$resp,y$p1,y$p2)
+    y0<-y[y$resp==0,]
+    y1<-y[y$resp==1,]
+    om0[g]<-imv(y0$resp,y0$p1,y0$p2)
+    om1[g]<-imv(y1$resp,y1$p1,y1$p2)
 }
 mean(om)
 
+mean(om0)
+mean(om1)
 
 #> mean(om)
 #[1] 0.67
