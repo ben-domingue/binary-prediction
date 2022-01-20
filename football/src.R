@@ -28,24 +28,30 @@ outer<-function(x) {
         imv(x$outcome,rep(p0,nrow(x)),x$prob.outcome...1.)
     }
     om<-sapply(L,f)
+    prev<-sapply(L,function(x) mean(x$outcome))
+    cbind(om,prev)
 }
-par(mfrow=c(1,2),mar=c(3,3,1,1),oma=rep(.5,4),mgp=c(2,1,0))
-om<-outer(x)
-plot(as.numeric(names(om)),om,type='l',ylim=c(0,.3),xlab="Season end",ylab="IMV")
-legend("topleft",bty='n','All')
-om<-outer(x[x$country=="England",])
-plot(as.numeric(names(om)),om,type='l',ylim=c(0,.3),xlab="Season end",ylab="IMV")
-legend("topleft",bty='n','England')
 
-## countries<-unique(x$country)
-## plot(NULL,xlim=c(1994,2025),type='l',ylim=c(0,.5))
-## countries<-c("England","France","Germany","Spain")
-## cols<-colorRampPalette(c("blue", "red"))( length(countries))
-## for (i in 1:length(countries)) {
-##     country<-countries[i]
-##     y<-x[x$country==country,]
-##     om<-outer(y)
-##     lines(as.numeric(names(om)),om,col=cols[i])
-##     n<-length(om)
-##     text(as.numeric(names(om))[n],om[n],country,pos=4,cex=.5,col=cols[i])
-## }
+pf<-function(om,txt) {
+    xv<-as.numeric(rownames(om))
+    yv<-om[,1]
+    plot(xv,yv,type='b',ylim=c(0,.4),xlab="Season end",ylab="IMV",col="darkgray",cex=1.3,pch=19)
+    m<-loess(yv~xv)
+    tmp<-cbind(m$x,fitted(m))
+    lines(tmp,col='red',lwd=2)
+    ##
+    legend("bottomright",bty='n',txt)
+}    
+pdf("/home/bd/Dropbox/Apps/Overleaf/BinaryPrediction/ben_figures/soccer.pdf",width=7,height=4)
+par(mfrow=c(1,3),mar=c(3,3,1,1),oma=rep(.5,4),mgp=c(2,1,0))
+##
+om<-outer(x)
+pf(om,"All")
+##
+om<-outer(x[x$country=="England",])
+pf(om,"England")
+##
+om<-outer(x[x$country=="Netherlands",])
+pf(om,"Netherlands")
+##
+dev.off()

@@ -65,7 +65,9 @@ pf<-function(x,y,col,txt) {
 }
 for (i in 1:length(xx)) {
     plot(NULL,xlim=c(1,log10(10000)),ylim=c(-.14,.23),xaxt="n",xlab="N",ylab="IMV")
-    legend("bottomright",bty="n",paste("b=",names(xx)[i],sep=""))
+    #bquote("r("~theta~", A')="~.(round(r.theta,2)))
+    nm<-names(xx)[i]
+    legend("bottomright",bty="n",legend=bquote(beta[1]~"="~.(nm)))
     abline(h=0,col='gray')
     axis(side=1,at=log10(c(50,100,500,1000,5000,10000)),c(50,100,500,1000,5000,10000))
     y<-xx[[i]]
