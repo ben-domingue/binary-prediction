@@ -1,3 +1,4 @@
+set.seed(1234)
 df<-read.csv("early_diabetes_data.csv",header=TRUE,sep=";")
 
 df$y<-df$class
@@ -53,3 +54,4 @@ for (g in 1:10) {
     om[g]<-imv(y$resp,y$p1,y$p2)
 }
 mean(om)
+sd(om)

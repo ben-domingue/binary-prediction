@@ -1,3 +1,4 @@
+set.seed(1234)
 df<-read.csv("breastcancer.csv",header=TRUE)
 
 df$y<-ifelse(df$diagnosis=="M",1,0)
@@ -64,10 +65,7 @@ for (g in 1:10) {
     om0[g]<-imv(y0$resp,y0$p1,y0$p2)
     om1[g]<-imv(y1$resp,y1$p1,y1$p2)
 }
-mean(om)
+mean(om)*1000
+sd(om)
 
-mean(om0)
-mean(om1)
 
-## > mean(om)
-## [1] 0.55

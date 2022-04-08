@@ -1,3 +1,4 @@
+set.seed(1234)
 df<-read.csv("bupa.data",header=FALSE)
 
 ## 1. mcv mean corpuscular volume
@@ -55,7 +56,6 @@ for (g in 1:10) {
     y$p1<-predict(m,xx0,type="response")
     om[g]<-imv(y$resp,y$p1,y$p2)
 }
-mean(om)
+mean(om)*1000
+sd(om)
 
-## > mean(om)
-## [1] 0.25

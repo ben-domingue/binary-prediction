@@ -45,7 +45,7 @@ models<-function(x,fm) {
     }
     per.female<-mean(x.hold$female,na.rm=TRUE)
     prevalence.outcome<-mean(x.hold[[all.vars(fm)[1] ]],na.rm=TRUE)
-    c(N=nrow(x.hold),per.female=per.female,prevalence.outcome=prevalence.outcome,beta=mean(beta),omega0=mean(om00),omega=mean(om))
+    c(N=nrow(x.hold),per.female=per.female,prevalence.outcome=prevalence.outcome,beta=mean(beta),omega0=mean(om00),omega=mean(om),sd.omega=sd(om))
 }
 
 

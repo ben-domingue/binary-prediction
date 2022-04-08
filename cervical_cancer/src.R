@@ -1,3 +1,4 @@
+set.seed(1234)
 df<-read.csv("risk_factors_cervical_cancer.csv")
 
 

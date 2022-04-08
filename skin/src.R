@@ -1,3 +1,4 @@
+set.seed(1234)
 df<-read.table("Skin_NonSkin.txt",header=FALSE)
 df$y<-df[,4]-1
 
@@ -47,4 +48,5 @@ for (g in 1:10) {
     om[g]<-imv(y$resp,y$p1,y$p2)
 }
 mean(om)
+sd(om)
 

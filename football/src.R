@@ -1,3 +1,4 @@
+set.seed(1234)
 imv<-function(y,p1,p2) {
     ##
     ll<-function(x,p) {

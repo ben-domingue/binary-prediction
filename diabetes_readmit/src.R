@@ -1,3 +1,4 @@
+set.seed(1234)
 df<-read.csv("diabetic_data.csv",header=TRUE)
 df$y<-ifelse(df$readmitted=="NO",0,1)
 
@@ -63,6 +64,7 @@ for (g in 1:10) {
     y$p1<-predict(m,xx0,type="response")
     om[g]<-imv(y$resp,y$p1,y$p2)
 }
-mean(om)
+mean(om)*1000
+sd(om)
 
 #0.19

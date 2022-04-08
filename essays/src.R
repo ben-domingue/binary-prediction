@@ -1,3 +1,4 @@
+set.seed(1234)
 df<-read.csv("essays__merged_final.csv")
 
 mm<-median(df$FAMILY_INCOME,na.rm=TRUE)
@@ -70,3 +71,4 @@ for (g in 1:10) {
     om[g]<-imv(y$resp,y$p1,y$p2)
 }
 mean(om)
+sd(om)

@@ -1,3 +1,4 @@
+set.seed(1234)
 df<-read.csv("glass.data",header=FALSE)
 
 ## 1. Id number: 1 to 214
@@ -62,6 +63,6 @@ for (g in 1:10) {
     om[g]<-imv(y$resp,y$p1,y$p2)
 }
 mean(om)
+sd(om)
 
-#> mean(om)
-#[1] 0.42
+
