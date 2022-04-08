@@ -58,7 +58,8 @@ bigfun<-function(df,fm1,fm2,nfold=10) { #CV prediction function within dataframe
     #for (i in 1:length(x)) p[i]<-gp(x[i])
     ##
     ##
-    c(prev,p,imv=mean(om),mean(mat[,nn]),
+    c(prev,NA #no p
+     ,imv=mean(om),mean(mat[,nn]),
       imv.sd=sd(om)
       )
 }
