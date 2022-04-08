@@ -39,19 +39,28 @@ bigfun<-function(df,fm1,fm2,nfold=10) { #CV prediction function within dataframe
     nn<-ncol(mat)
     x<-colMeans(mat[,-nn]) #no r2 
     ##
-    prev<-mean(df[[outcome]],na.rm=TRUE)
-    getp<-function(a) {
-        f<-function(p,a) abs(p*log(p)+(1-p)*log(1-p)-log(a))
-        nlminb(.5,f,lower=0.001,upper=.999,a=a)$par
+    ewfun<-function(l1,l2) {
+        getp<-function(a) {
+            f<-function(p,a) abs(p*log(p)+(1-p)*log(1-p)-log(a))
+            nlminb(.5,f,lower=0.001,upper=.999,a=a)$par
+        }
+        bet<-function(tp,ap) (tp-ap)/ap
+        ap<-getp(l1)
+        tp<-getp(l2)
+        ew<-bet(ap=ap,tp=tp)
+        ew
     }
-    gp<-Vectorize(getp)
-    p<-numeric()
-    for (i in 1:length(x)) p[i]<-gp(x[i])
+    om<-numeric()
+    for (i in 1:nrow(mat)) om[i]<-ewfun(mat[i,1],mat[i,2])
+    prev<-mean(df[[outcome]],na.rm=TRUE)
+    #gp<-Vectorize(getp)
+    #p<-numeric()
+    #for (i in 1:length(x)) p[i]<-gp(x[i])
     ##
-    bet<-function(tp,ap) (tp-ap)/ap
-    ew<-bet(p[2],p[1])
     ##
-    c(prev,p,ew,mean(mat[,nn]))
+    c(prev,p,imv=mean(om),mean(mat[,nn]),
+      imv.sd=sd(om)
+      )
 }
 
 

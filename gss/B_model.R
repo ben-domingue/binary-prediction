@@ -1,3 +1,4 @@
+set.seed(1234)
 source("/home/bd/Dropbox/projects/binaryprediction/src/00_bigfun.R")
 load(file="/home/bd/Dropbox/projects/binaryprediction/data/gss/df_gss.Rdata")
 results<-list()
@@ -38,7 +39,7 @@ for (yr in 1972:2018) {
     x<-x[rowSums(is.na(tmp))==0,]
     if (nrow(x)>100) {
         ew<-bigfun(x,fm1=fm1,fm2=fm2)
-        out[[as.character(yr)]]<-c(yr,ew[c(1,4)],nrow(x))
+        out[[as.character(yr)]]<-c(yr,ew[c(1,4)],nrow(x),ew[c(1,6)])
     }
 }
 out->out2
