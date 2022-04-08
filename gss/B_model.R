@@ -17,7 +17,7 @@ for (yr in 1972:2018) {
     print(c(yr,nrow(x)))
     if (nrow(x)>100) {
         ew<-bigfun(x,fm1=fm1,fm2=fm2)
-        out[[as.character(yr)]]<-c(yr,ew[c(1,4)],nrow(x))
+        out[[as.character(yr)]]<-c(yr,ew[c(1,4)],nrow(x),ew[c(1,6)])
     }
 }
 out->out1
@@ -45,11 +45,11 @@ for (yr in 1972:2018) {
 out->out2
 
 #########################################################
-pdf("/home/bd/Dropbox/Apps/Overleaf/BinaryPrediction/gss.pdf",width=5,height=5)
+pdf("/home/bd/Dropbox/Apps/Overleaf/BinaryPrediction/gss.pdf",width=7,height=4)
 layout(matrix(c(1,1,2),nrow=3))
 par(mar=c(3,3,1,1),mgp=c(2,1,0),oma=c(.5,2,.5,.5))
 mat<-do.call("rbind",out1)
-plot(mat[,1],mat[,3],type='b',ylim=c(0,.32),pch=19,col='red',lwd=2,xlab="Year",ylab="",xlim=c(1970,2020))
+plot(mat[,1],mat[,3],type='b',ylim=c(0,.28),pch=19,col='red',lwd=2,xlab="Year",ylab="",xlim=c(1970,2020))
 games<-list(`Sports Book`=0.091,Baccarat=0.048,Blackjack=0.0099)
 for (ii in 1:length(games)) {
     game<-games[[ii]]

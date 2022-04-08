@@ -1,3 +1,4 @@
+set.seed(1234)
 ##################################################################################################
 source("/home/bd/Dropbox/projects/binaryprediction/src/00_bigfun.R")
 load(file="/home/bd/Dropbox/projects/binaryprediction/data/hrs/df.Rdata")
@@ -34,7 +35,7 @@ wrapper<-function(df,fm1,fm2,conds) {
             x<-x[rowSums(is.na(tmp))==0,]
             if (nrow(x)>1000) {
                 ew<-bigfun(x,fm1=fm1,fm2=fm2)
-                out[[paste(cond,yr)]]<-c(cond,yr,ew[c(1,4)],nrow(x))
+                out[[paste(cond,yr)]]<-c(cond,yr,ew[c(1,4)],nrow(x),ew[c(1,6)])
             }
         }
     }

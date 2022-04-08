@@ -1,3 +1,4 @@
+set.seed(1234)
 load("pisa.Rdata")
 
 ##re beta prior on guessing param https://groups.google.com/g/mirt-package/c/8Usx53BoXyw
@@ -145,10 +146,10 @@ imv<-function(pr) {
     c3<-getcoins(loglik3)
     c2f<-getcoins(loglik2f)
     ew<-function(p1,p0) (p1-p0)/p0
-    imv0<-ew(c2,c1)
-    imv1<-ew(c3,c2)
-    imv2<-ew(c2f,c2)
-    c(imv0,imv1,imv2)
+    imv0<-ew(c2,c1)  #2pl versus 1pl
+    imv1<-ew(c3,c2) #3pl versus 2pl
+    imv2<-ew(c2f,c2) #two factor 2pl versus 2pl
+    c(imv0,imv1,imv2) 
 }
 
 ew<-list()
@@ -156,4 +157,6 @@ for (i in 1:10) {
     pr<-predict(x)
     ew[[i]]<-imv(pr)
 }
-colMeans(do.call("rbind",ew))
+tmp<-do.call("rbind",ew)
+colMeans(tmp)
+apply(tmp,2,sd)

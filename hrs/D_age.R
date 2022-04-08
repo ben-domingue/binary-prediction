@@ -1,3 +1,4 @@
+set.seed(1234)
 ##################################################################################################
 source("/home/bd/Dropbox/projects/binaryprediction/src/00_bigfun.R")
 load(file="/home/bd/Dropbox/projects/binaryprediction/data/hrs/df.Rdata")
