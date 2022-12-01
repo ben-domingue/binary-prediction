@@ -46,10 +46,10 @@ par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(2,1,0),lwd=2)
 #lines(df1$prev,df1$b1,col='black')
 plot(df2$b0,df2$r2,type='l',col='red',lwd=2,ylim=c(0,yl))
 lines(df1$b0,df1$r2,col='black',lwd=2)
-legend("topleft",title="omega",legend=c(unique(df2$omega),unique(df1$omega)),fill=c("red","black"),bty='n')
+legend("topleft",title=expression(omega),legend=c(unique(df2$omega),unique(df1$omega)),fill=c("red","black"),bty='n')
 ##
 plot(df2$b1,df2$r2,type='l',col='red',lwd=2,xlim=c(0,max(c(df1$b1,df2$b1))),ylim=c(0,yl))
 lines(df1$b1,df1$r2,col='black',lwd=2)
-legend("topleft",title="omega",legend=c(unique(df2$omega),unique(df1$omega)),fill=c("red","black"),bty='n')
+legend("topleft",title=expression(omega),legend=c(unique(df2$omega),unique(df1$omega)),fill=c("red","black"),bty='n')
 dev.off()
 

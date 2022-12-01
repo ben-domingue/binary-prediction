@@ -49,70 +49,37 @@ getvals<-function(df) {
       IMV.or2=ew.or2)
 }
 
-## simfun<-function(N=1000,a=9,b=15,delta,eps=1e-3) {
-##     p<-rbeta(N,a,b)
-##     y<-rbinom(N,1,p)
-##     y2<-rbinom(N,1,p)
-##     ##
-##     delta1<-runif(N,-1*delta,delta)
-##     delta2<-runif(N,-1*delta,delta)
-##     ##
-##     p1<-p+delta1
-##     p1<-ifelse(p1<=0,eps,p1)
-##     p1<-ifelse(p1>=1,1-eps,p1)
-##     p2<-p+delta1+delta2
-##     p2<-ifelse(p2<=0,eps,p2)
-##     p2<-ifelse(p2>=1,1-eps,p2)
-##     ##
-##     data.frame(p=p,p1=p1,p2=p2,y=y,y2=y2)
-## }
-
-## ##a/(a+b)
-## MD<-.2
-## a<-1
-## dfL<-list()
-## N<-1000
-## for (b in c(1,3)) {
-##     L<-list()
-##     for (i in 1:200) {
-##         delta<-runif(1,min=0,max=MD)
-##         z<-simfun(a=a,b=b,delta=delta,N=N)
-##         L[[i]]<-c(mean=a/(a+b),delta=delta,getvals(z))
-##     }
-##     dfL[[as.character(b)]]<-data.frame(do.call("rbind",L))
-## }
-
 simfun<-function(N=1000,delta,MD) {
     p<-rbeta(N,a,b)
-    p<-2*MD+(1-4*MD)*p
+    p<-MD+(1-2*MD)*p
     #p<-runif(N,2*MD,1-2*MD)
     y<-rbinom(N,1,p)
-    y2<-rbinom(N,1,p)
+    y2<-y #rbinom(N,1,p)
     ##
     delta1<-sample(c(-1,1),N,replace=TRUE) #runif(N,-1*delta,delta)
     delta2<-sample(c(-1,1),N,replace=TRUE) #runif(N,-1*delta,delta) runif(N,-1*delta,delta)
     ##
     p1<-p+delta1*delta
-    p2<-p+2*delta2*delta
+    p2<-p+delta2*delta
     ##
     data.frame(p=p,p1=p1,p2=p2,y=y,y2=y2)
 }
 
 N<-1000
-MD<-.1
+MD<-.2
 a<-1
 dfL<-list()
-for (b in 1) {
+for (b in c(1)) {
     L<-list()
     for (i in 1:2000) {
         delta<-runif(1,min=0,max=MD)
         z<-simfun(delta=delta,N=N,MD=MD)
-        L[[i]]<-c(mean=2*MD+(1-4*MD)*(a/(a+b)),delta=delta,getvals(z)) #    p<-2*MD+(1-4*MD)*p
+        L[[i]]<-c(mean=MD+(1-2*MD)*(a/(a+b)),delta=delta,getvals(z)) #    p<-2*MD+(1-4*MD)*p
     }
     dfL[[as.character(b)]]<-data.frame(do.call("rbind",L))
 }
 
-pdf("/home/bd/Dropbox/Apps/Overleaf/BinaryPrediction/chicco_oracle.pdf",width=7,height=4)
+pdf("/home/bd/Dropbox/Apps/Overleaf/BinaryPrediction/chicco_oracle.pdf",width=6,height=4)
 #par(mfcol=c(4,length(dfL)),mgp=c(2,1,0),mar=c(3,2,1,1),oma=rep(.1,4))
 par(mfcol=c(2,2),mgp=c(2,1,0),mar=c(3,2,1,1),oma=rep(.1,4))
 pf<-function(x,y,col,txt,...) {
@@ -144,8 +111,7 @@ for (i in 1:length(dfL)) {
         plot(NULL,xlim=range(df$delta),ylim=yl,xlab='',ylab='')
         mtext(side=1,expression(delta),line=2)
         #if (nm=="R2") legend("topleft",bty='n',legend=round(df$mean[1],3))
-        pf(df$delta,df[[paste(nm,"1",sep="")]],col='blue','')
-        pf(df$delta,df[[paste(nm,"2",sep="")]],col='red','')
+        pf(df$delta,df[[paste(nm,"1",sep="")]],col='red','')
         pf(df$delta,df[[paste(nm,".true",sep='')]],col='black','',lty=1)
         legend("topleft",bty='n',nm)
         abline(h=0,col='gray')    
@@ -153,7 +119,7 @@ for (i in 1:length(dfL)) {
         ##     pf(df$delta,df$IMV.or1,col='blue','',lty=2)
         ##     pf(df$delta,df$IMV.or2,col='red','',lty=2)
         ## }
-        if (nm=="R2") legend("topright",bty='n',lty=c(1,1,1),col=c("blue","red","black"),c("p1","p2","Truth"))
+        if (nm=="R2") legend("topright",bty='n',lty=c(1,1,1),col=c("red","black"),c("p1","p"))
         #if (nm=="IMV") legend("topright",bty='n',lty=c(2,2),col=c("blue","red"),c("Oracle, p1","Oracle, p2"))
     }
 }
